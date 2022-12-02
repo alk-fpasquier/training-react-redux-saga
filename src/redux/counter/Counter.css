@@ -1,0 +1,8 @@
+.Counter__button + .Counter__button {
+  margin-left: 1em;
+}
+
+.Counter__inputNumber {
+  width: 3em;
+  margin-left: 0.5em;
+}
