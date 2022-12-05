@@ -14,10 +14,10 @@ export const incrementAction = (): Action => ({ type: INCREMENT_ACTION });
 
 /* Reducers functions */
 
-const increment = (state: CounterState): CounterState => ({
-  ...state,
-  value: state.value + 1,
-});
+const increment = (state: CounterState): CounterState => {
+  state.value += 1;
+  return state;
+};
 
 /** Main reducer */
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 
 export function HomePage() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState({ value: 0 });
   return (
     <>
       <div>
@@ -15,8 +15,12 @@ export function HomePage() {
       </div>
       <h1>React, Redux and Saga training</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button
+          onClick={() =>
+            setCount(Object.assign(count, { value: count.value + 1 }))
+          }
+        >
+          count is {count.value}
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
