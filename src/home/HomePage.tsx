@@ -1,5 +1,5 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
+import "./HomePage.css";
 
 export function HomePage() {
   const [count, setCount] = useState({ value: 0 });
@@ -10,11 +10,11 @@ export function HomePage() {
           <img src="/vite.svg" className="logo" alt="Vite logo" />
         </a>
         <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src="/react.svg" className="logo react" alt="React logo" />
         </a>
       </div>
       <h1>React, Redux and Saga training</h1>
-      <div className="card">
+      <div className="HomePage__card">
         <button
           onClick={() =>
             setCount(Object.assign(count, { value: count.value + 1 }))
@@ -23,10 +23,10 @@ export function HomePage() {
           count is {count.value}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Edit <code>src/home/HomePage.tsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
+      <p className="HomePage__readTheDocs">
         Click on the Vite and React logos to learn more
       </p>
     </>

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import "./App.css";
-import { HomePage } from "./HomePage";
+import { HomePage } from "./home/HomePage";
 import { ReduxSagaPage } from "./redux-saga/ReduxSagaPage";
 import { ReduxPage } from "./redux/ReduxPage";
 
