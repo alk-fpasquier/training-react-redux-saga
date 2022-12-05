@@ -19,4 +19,6 @@ Finally start the development server:
 
 ```bash
 npm run dev
+# or
+npm start
 ```
