@@ -10,13 +10,9 @@ const fakeRequest = <T = unknown>(func: T): T =>
 
 export const fetchCounter = fakeRequest(async () => {
   const value = localStorage.getItem("counter") || "";
-  return /^[0-9]+$/.test(value) ? Number(value) : 0;
+  return /^[-0-9]+$/.test(value) ? Number(value) : 0;
 });
 
-// export const postCounter = fakeRequest(async (counter: number) => {
-//   localStorage.setItem("counter", String(counter));
-// });
-
-export const postCounter = () => {
-  throw new Error("lol");
-};
+export const postCounter = fakeRequest(async (counter: number) => {
+  localStorage.setItem("counter", String(counter));
+});
