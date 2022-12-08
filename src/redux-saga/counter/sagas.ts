@@ -8,7 +8,7 @@ import {
   setCounterAction,
 } from "./reducers";
 
-function withCath(saga: any): any {
+function withCatch(saga: any): any {
   return function* () {
     try {
       yield call(saga);
@@ -19,10 +19,10 @@ function withCath(saga: any): any {
 }
 
 export function* counterSaga() {
-  yield takeLatest(FETCH_COUNTER_ACTION, withCath(fetchCounterSaga));
+  yield takeLatest(FETCH_COUNTER_ACTION, withCatch(fetchCounterSaga));
   yield takeLatest(
     [INCREMENT_ACTION, DECREMENT_ACTION, INCREMENT_BY_ACTION],
-    withCath(saveCounterSaga)
+    withCatch(saveCounterSaga)
   );
 }
 
