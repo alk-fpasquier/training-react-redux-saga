@@ -13,6 +13,10 @@ export const fetchCounter = fakeRequest(async () => {
   return /^[0-9]+$/.test(value) ? Number(value) : 0;
 });
 
-export const postCounter = fakeRequest(async (counter: number) => {
-  localStorage.setItem("counter", String(counter));
-});
+// export const postCounter = fakeRequest(async (counter: number) => {
+//   localStorage.setItem("counter", String(counter));
+// });
+
+export const postCounter = () => {
+  throw new Error("lol");
+};

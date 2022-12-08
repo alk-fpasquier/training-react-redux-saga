@@ -20,7 +20,7 @@ export const setCounterAction = (payload: number): PayloadAction<number> => ({
   type: SET_COUNTER_ACTION,
   payload,
 });
-export const incrementAction = (): Action => ({ type: INCREMENT_ACTION });
+export const incrementAction = (): Action => setCounterAction(1);
 
 /* Reducers functions */
 
@@ -36,6 +36,11 @@ const setCounterReducer = (
   ...state,
   value: action.payload,
   isFetching: false,
+});
+
+const incrementReducer = (state: CounterState): CounterState => ({
+  ...state,
+  value: state.value + 1,
 });
 
 /** Main reducer */
@@ -59,6 +64,8 @@ export const counterReducer: Reducer<CounterState, Actions> = (
         state,
         action as ReturnType<typeof setCounterAction>
       );
+    case INCREMENT_ACTION:
+      return incrementReducer(state);
     default:
       return state;
   }
