@@ -1,29 +1,34 @@
+import { useAtom } from "jotai";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../store";
+import { countAtom, decrementCountAtom, increaseCountByAtom, incrementCountAtom } from "./atoms/counter";
 import "./Counter.css";
-import { decrementAction, incrementAction, incrementByAction } from "./reducers";
 
 export function Counter() {
-  const dispatch = useDispatch();
-  const counter = useSelector((state) => state.counter.value);
   const [inputValue, setInputValue] = useState(0);
+
+  const [count] = useAtom(countAtom)
+
+  const [, incrementCount] = useAtom(incrementCountAtom)
+  const [, decrementCount] = useAtom(decrementCountAtom)
+  const [, increaseCountBy] = useAtom(increaseCountByAtom)
+
   return (
     <>
       <p>
-        Count is <strong>{counter}</strong>
+        Count is <strong>{count}</strong>
       </p>
       <p>
         <button
           className="Counter__button"
-          onClick={() => dispatch(incrementAction())}
+          onClick={() => incrementCount()}
         >
           Increment
         </button>
         <button className="Counter__button"
-          onClick={() => dispatch(decrementAction())}
+          onClick={() => decrementCount()}
         >Decrement</button>
         <button className="Counter__button"
-        onClick={() => dispatch(incrementByAction(inputValue))}
+          onClick={() => increaseCountBy(inputValue)}
         >
           Increment by
           <input

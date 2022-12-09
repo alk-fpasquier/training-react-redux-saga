@@ -9,36 +9,46 @@ export interface CounterState {
 /* Reducers actions */
 
 const INCREMENT_ACTION = "counter/increment";
-const DECREMENT_ACTION = "counter/decrement";
 const INCREMENT_BY_ACTION = "counter/incrementBy";
+const DECREMENT_ACTION = "counter/decrement";
 
 export const incrementAction = (): Action => ({ type: INCREMENT_ACTION });
-export const decrementAction = (): Action => ({ type: DECREMENT_ACTION });
-export const incrementByAction = (payload: number): PayloadAction<number> => ({
+
+export const incrementByAction = (payload: number): PayloadAction<number, string> => ({
   type: INCREMENT_BY_ACTION,
-  payload,
+  payload
 });
+
+export const decrementAction = (): Action => ({ type: DECREMENT_ACTION });
+
 
 /* Reducers functions */
 
-const increment = (state: CounterState): CounterState => {
-  return { ...state, value: state.value + 1 };
-};
+const increment = (state: CounterState): CounterState => ({
+  ...state,
+  value: state.value + 1
+});
 
-const decrement = (state: CounterState): CounterState => {
-  return { ...state, value: state.value - 1 };
-};
+const incrementBy = (
+  state: CounterState,
+  action: ReturnType<typeof incrementByAction>
+): CounterState => ({
+  ...state,
+  value: state.value + action.payload
+});
 
-const incrementBy = (state: CounterState, count: number): CounterState => {
-  return { ...state, value: state.value + count };
-};
+const decrement = (state: CounterState): CounterState => ({
+  ...state,
+  value: state.value - 1
+});
 
 /** Main reducer */
 
 type Actions =
   | ReturnType<typeof incrementAction>
   | ReturnType<typeof decrementAction>
-  | ReturnType<typeof incrementByAction>;
+  | ReturnType<typeof incrementByAction>
+  ;
 
 const initialState: CounterState = {
   value: 0,
@@ -46,18 +56,15 @@ const initialState: CounterState = {
 
 export const counterReducer: Reducer<CounterState, Actions> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case INCREMENT_ACTION:
       return increment(state);
-    case DECREMENT_ACTION:
-      return decrement(state);
-    case INCREMENT_BY_ACTION:
-      return incrementBy(
-        state,
-        (action as ReturnType<typeof incrementByAction>).payload
-      );
+      case INCREMENT_BY_ACTION:
+        return incrementBy(state, action as ReturnType<typeof incrementByAction>);
+      case DECREMENT_ACTION:
+        return decrement(state);
     default:
       return state;
   }

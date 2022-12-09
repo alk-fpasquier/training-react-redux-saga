@@ -3,6 +3,8 @@ import "./App.css";
 import { HomePage } from "./home/HomePage";
 import { ReduxSagaPage } from "./redux-saga/ReduxSagaPage";
 import { ReduxPage } from "./redux/ReduxPage";
+import { JotaiPage } from "./jotai/JotaiPage";
+import { ReactQueryPage } from "./react-query/ReactQueryPage";
 
 export function App() {
   const { page, updatePage } = usePage();
@@ -31,6 +33,20 @@ export function App() {
         >
           Saga
         </button>
+        <button
+          className="App__headerButton"
+          onClick={() => updatePage("jotai")}
+          disabled={page === "jotai"}
+        >
+          Jotai
+        </button>
+        <button
+          className="App__headerButton"
+          onClick={() => updatePage("react-query")}
+          disabled={page === "react-query"}
+        >
+          React Query
+        </button>
       </header>
       {page === "home" ? (
         <HomePage />
@@ -38,6 +54,10 @@ export function App() {
         <ReduxPage />
       ) : page === "saga" ? (
         <ReduxSagaPage />
+      ) : page === "jotai" ? (
+        <JotaiPage />
+      ) : page === "react-query" ? (
+        <ReactQueryPage />
       ) : null}
     </div>
   );

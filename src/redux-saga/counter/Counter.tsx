@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "../store";
 import "./Counter.css";
-import {
-  decrementAction,
-  fetchCounterAction,
-  incrementAction,
-  incrementByAction,
-} from "./reducers";
+import { decrementAction, fetchCounterAction, incrementAction } from "./reducers";
 
 export function Counter() {
   const dispath = useDispatch();
   const counter = useSelector((state) => state.counter.value);
   const isFetching = useSelector((state) => state.counter.isFetching);
-  const [inputValue, setInputValue] = useState(0);
 
   useEffect(() => {
     dispath(fetchCounterAction());
@@ -37,25 +31,16 @@ export function Counter() {
         >
           Increment
         </button>
-        <button
-          className="Counter__button"
-          onClick={() => dispath(decrementAction())}
-          disabled={isFetching}
-        >
+        <button className="Counter__button" disabled={isFetching}
+          onClick={() => dispath(decrementAction())} >
           Decrement
         </button>
-        <button
-          className="Counter__button"
-          onClick={() => dispath(incrementByAction(inputValue))}
-          disabled={isFetching}
-        >
+        <button className="Counter__button" disabled={isFetching}>
           Increment by
           <input
             className="Counter__inputNumber"
             type="number"
             onClick={(e) => e.stopPropagation()}
-            value={inputValue}
-            onChange={(e) => setInputValue(Number(e.target.value))}
           />
         </button>
       </p>

@@ -1,29 +1,10 @@
 import { call, delay, put, select, takeLatest } from "redux-saga/effects";
 import { fetchCounter, postCounter } from "./apis";
-import {
-  DECREMENT_ACTION,
-  FETCH_COUNTER_ACTION,
-  INCREMENT_ACTION,
-  INCREMENT_BY_ACTION,
-  setCounterAction,
-} from "./reducers";
-
-function withCatch(saga: any): any {
-  return function* () {
-    try {
-      yield call(saga);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-}
+import { FETCH_COUNTER_ACTION, INCREMENT_ACTION, setCounterAction } from "./reducers";
 
 export function* counterSaga() {
-  yield takeLatest(FETCH_COUNTER_ACTION, withCatch(fetchCounterSaga));
-  yield takeLatest(
-    [INCREMENT_ACTION, DECREMENT_ACTION, INCREMENT_BY_ACTION],
-    withCatch(saveCounterSaga)
-  );
+  yield takeLatest(FETCH_COUNTER_ACTION, fetchCounterSaga);
+  yield takeLatest (INCREMENT_ACTION, incrementCounterSaga);
 }
 
 function* fetchCounterSaga() {
@@ -31,8 +12,10 @@ function* fetchCounterSaga() {
   yield put(setCounterAction(counter));
 }
 
-function* saveCounterSaga() {
+function* incrementCounterSaga() {
   yield delay(500);
   const count = yield select((state) => state.counter.value);
+  console.log("post count:", count);
   yield call(postCounter, count);
+  console.log("post done");
 }
